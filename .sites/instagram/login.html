@@ -1,1623 +1,1357 @@
 <!DOCTYPE html>
 <html lang="en" class="js not-logged-in client-root js-focus-visible sDN5V">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <title>Instagram</title>
-    <link rel="icon" type="image/x-icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNDHzb5vBF.ico">
+	<link rel="icon" type="image/x-icon" href="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNDHzb5vBF.ico">
+
     <meta name="robots" content="noimageindex, noarchive" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#ffffff" />
-    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-
+    <meta
+      id="viewport"
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
+    />
     <style>
-        /* Modern Instagram Clone Styles - Based on Ali Milani Amin's Structure */
-        
-        /* Reset & Variables */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Instagram Color Variables */
-            --ig-primary-button: #0095f6;
-            --ig-primary-button-hover: #1877f2;
-            --ig-secondary-button: #efefef;
-            --ig-error: #ed4956;
-            --ig-success: #00c896;
-            --ig-border: #dbdbdb;
-            --ig-placeholder: #8e8e8e;
-            --ig-link: #0095f6;
-            --ig-text: #262626;
-            --ig-text-light: #8e8e8e;
-            --ig-background: #fafafa;
-            --ig-elevated-background: #ffffff;
-            --ig-stroke: #262626;
-            --ig-highlight: #ed4956;
-            --ig-gradient: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-        }
-
-        body {
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-            background-color: var(--ig-background);
-            color: var(--ig-text);
-            margin: 0;
-            padding: 0;
-            line-height: 1.3;
-        }
-
-        /* Hidden/Show Classes (from original) */
-        .hidden {
-            visibility: hidden !important;
-        }
-        .show {
-            visibility: visible !important;
-        }
-        .L84MX {
-            display: none;
-        }
-        .QzzMF {
-            display: block;
-        }
-
-        /* Utility Classes (enhanced from original) */
-        .qF0y9 {
-            display: flex;
-        }
-        .rBNOH {
-            align-items: center;
-        }
-        .YBx95 {
-            justify-content: center;
-        }
-        .CcYR1 {
-            justify-content: space-between;
-        }
-        .vwCYk {
-            flex: 1 1 auto;
-            min-height: 0;
-            min-width: 0;
-        }
-        ._4EzTm {
-            flex: 0 0 auto;
-        }
-
-        /* LOGIN PAGE STYLES */
-        .login-wrapper {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 32px 0;
-            background-color: var(--ig-background);
-        }
-
-        .login-content {
-            display: flex;
-            max-width: 935px;
-            width: 100%;
-            margin-bottom: 32px;
-        }
-
-        .login-left {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 32px;
-            position: relative;
-        }
-
-        .phone-mockup {
-            width: 454px;
-            height: 618px;
-            background-image: url('https://static.cdninstagram.com/rsrc.php/v3/y4/r/ItTndlZM2n2.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        .screenshot-slider {
-            position: absolute;
-            top: 99px;
-            right: 18px;
-            width: 240px;
-            height: 427px;
-            overflow: hidden;
-        }
-
-        .screenshot {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .screenshot.active {
-            opacity: 1;
-        }
-
-        .screenshot:nth-child(1) {
-            background-image: url('https://static.cdninstagram.com/rsrc.php/v3/ym/r/V4GvPkb82pX.png');
-        }
-
-        .screenshot:nth-child(2) {
-            background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yv/r/FnNVWzwdoOu.png');
-        }
-
-        .screenshot:nth-child(3) {
-            background-image: url('https://static.cdninstagram.com/rsrc.php/v3/y1/r/W_bFAL1AR4I.png');
-        }
-
-        .login-right {
-            flex: 0 0 350px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-box, .signup-box {
-            background: var(--ig-elevated-background);
-            border: 1px solid var(--ig-border);
-            padding: 36px 40px;
-            margin-bottom: 10px;
-        }
-
-        .signup-box {
-            padding: 21px 0;
-            text-align: center;
-        }
-
-        .instagram-logo {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .instagram-logo img {
-            height: 51px;
-        }
-
-        /* Form Styles (enhanced from original structure) */
-        .login-form {
-            margin-bottom: 14px;
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 6px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 9px 8px 7px;
-            background: var(--ig-background);
-            border: 1px solid var(--ig-border);
-            border-radius: 3px;
-            font-size: 12px;
-            line-height: 14px;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .form-input:focus {
-            border-color: #a8a8a8;
-            background: var(--ig-elevated-background);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--ig-text);
-            cursor: pointer;
-        }
-
-        /* Button Styles (modernized from original) */
-        .sqdOP {
-            appearance: none;
-            background: transparent;
-            border: 0;
-            box-sizing: border-box;
-            cursor: pointer;
-            display: block;
-            font-weight: 600;
-            padding: 5px 9px;
-            text-align: center;
-            text-transform: inherit;
-            text-overflow: ellipsis;
-            user-select: none;
-            width: 100%;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .y3zKF {
-            background-color: var(--ig-primary-button);
-            color: white;
-            margin-top: 8px;
-        }
-
-        .y3zKF:hover {
-            background-color: var(--ig-primary-button-hover);
-        }
-
-        .y3zKF:active {
-            opacity: 0.7;
-        }
-
-        .or-divider {
-            position: relative;
-            margin: 18px 0;
-            text-align: center;
-            color: var(--ig-text-light);
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .or-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--ig-border);
-        }
-
-        .or-divider span {
-            background: var(--ig-elevated-background);
-            padding: 0 16px;
-        }
-
-        .facebook-login {
-            color: #385185;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .forgot-password {
-            color: #00376b;
-            font-size: 12px;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-        }
-
-        .signup-link {
-            color: var(--ig-link);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        /* MAIN APP STYLES */
-        .main-app {
-            display: none;
-            min-height: 100vh;
-            background: var(--ig-background);
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--ig-elevated-background);
-            border-bottom: 1px solid var(--ig-border);
-            z-index: 1000;
-            height: 60px;
-        }
-
-        .nav-container {
-            max-width: 975px;
-            margin: 0 auto;
-            padding: 0 20px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo img {
-            height: 29px;
-        }
-
-        .nav-search {
-            position: relative;
-            width: 268px;
-        }
-
-        .nav-search input {
-            width: 100%;
-            height: 36px;
-            background: var(--ig-secondary-button);
-            border: 1px solid var(--ig-border);
-            border-radius: 8px;
-            padding: 0 16px 0 40px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .nav-search input:focus {
-            background: var(--ig-elevated-background);
-        }
-
-        .nav-search i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--ig-text-light);
-            font-size: 12px;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-        }
-
-        .nav-icon {
-            font-size: 22px;
-            color: var(--ig-text);
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-icon:hover {
-            color: var(--ig-text-light);
-        }
-
-        .profile-dropdown {
-            position: relative;
-        }
-
-        .profile-pic {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--ig-elevated-background);
-            border: 1px solid var(--ig-border);
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            width: 200px;
-            display: none;
-            z-index: 1001;
-            margin-top: 8px;
-        }
-
-        .dropdown-menu a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 16px;
-            color: var(--ig-text);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .dropdown-menu a:hover {
-            background: var(--ig-background);
-        }
-
-        /* Main Content Layout */
-        .main-content {
-            max-width: 975px;
-            margin: 0 auto;
-            padding: 88px 20px 0;
-            display: grid;
-            grid-template-columns: 1fr 293px;
-            gap: 35px;
-        }
-
-        .content-feed {
-            max-width: 470px;
-        }
-
-        /* Stories Section */
-        .stories-container {
-            background: var(--ig-elevated-background);
-            border: 1px solid var(--ig-border);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 24px;
-            display: flex;
-            gap: 14px;
-            overflow-x: auto;
-        }
-
-        .story-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            min-width: 66px;
-            cursor: pointer;
-        }
-
-        .story-avatar {
-            width: 66px;
-            height: 66px;
-            border-radius: 50%;
-            background: var(--ig-gradient);
-            padding: 2px;
-            position: relative;
-        }
-
-        .story-avatar img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .story-avatar.viewed {
-            background: var(--ig-text-light);
-        }
-
-        .story-username {
-            font-size: 12px;
-            max-width: 66px;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .add-story-btn {
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            width: 20px;
-            height: 20px;
-            background: var(--ig-primary-button);
-            color: white;
-            border-radius: 50%;
-            border: 2px solid white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        /* Posts */
-        .post {
-            background: var(--ig-elevated-background);
-            border: 1px solid var(--ig-border);
-            border-radius: 8px;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.3s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-        }
-
-        .post-user {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .post-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-        }
-
-        .post-username {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .post-location {
-            font-size: 12px;
-            color: var(--ig-text-light);
-        }
-
-        .post-options {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--ig-text);
-        }
-
-        .post-media img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .post-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 16px 8px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 16px;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--ig-text);
-            transition: all 0.2s ease;
-        }
-
-        .action-btn:hover {
-            opacity: 0.5;
-        }
-
-        .like-btn.liked i {
-            color: var(--ig-highlight);
-        }
-
-        .save-btn.saved i {
-            color: var(--ig-text);
-        }
-
-        .post-info {
-            padding: 0 16px 16px;
-        }
-
-        .likes-count {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .post-caption {
-            font-size: 14px;
-            line-height: 18px;
-            margin-bottom: 4px;
-        }
-
-        .view-comments {
-            background: none;
-            border: none;
-            color: var(--ig-text-light);
-            font-size: 14px;
-            cursor: pointer;
-            margin-bottom: 4px;
-        }
-
-        .post-time {
-            color: var(--ig-text-light);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.2px;
-        }
-
-        .comment-section {
-            border-top: 1px solid var(--ig-secondary-button);
-            padding: 16px;
-            display: flex;
-            align-items: center;
-        }
-
-        .comment-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            background: transparent;
-        }
-
-        .comment-submit {
-            background: none;
-            border: none;
-            color: var(--ig-primary-button);
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: sticky;
-            top: 88px;
-            height: fit-content;
-        }
-
-        .user-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .user-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-details .username {
-            display: block;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .user-details .fullname {
-            color: var(--ig-text-light);
-            font-size: 14px;
-        }
-
-        .switch-btn {
-            background: none;
-            border: none;
-            color: var(--ig-primary-button);
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .suggestions {
-            margin-bottom: 24px;
-        }
-
-        .suggestions-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .suggestions-title {
-            font-weight: 600;
-            color: var(--ig-text-light);
-            font-size: 14px;
-        }
-
-        .see-all {
-            color: var(--ig-text);
-            font-size: 12px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .suggestion-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .suggestion-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-        }
-
-        .suggestion-info {
-            flex: 1;
-        }
-
-        .suggestion-username {
-            display: block;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .suggestion-relation {
-            color: var(--ig-text-light);
-            font-size: 12px;
-        }
-
-        .follow-btn {
-            background: none;
-            border: none;
-            color: var(--ig-primary-button);
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                max-width: 470px;
-            }
-            .sidebar {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .login-content {
-                flex-direction: column;
-                align-items: center;
-            }
-            .login-left {
-                display: none;
-            }
-            .login-right {
-                flex: none;
-                width: 100%;
-                max-width: 350px;
-            }
-            .nav-search {
-                display: none;
-            }
-            .main-content {
-                padding: 70px 0 0 0;
-            }
-            .content-feed {
-                max-width: 100%;
-            }
-            .stories-container, .post {
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid var(--ig-primary-button);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Like Animation */
-        @keyframes likeAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-
-        .like-btn.animate {
-            animation: likeAnimation 0.3s ease-out;
-        }
+      /* [Enhanced] page loader css */
+      .hidden {
+        visibility: none !important;
+      }
+      ._9eogI {
+        visibility: hidden !important;
+      }
+      .RP4i1,
+      .JtrJi {
+        visibility: hidden !important;
+      }
+      .show {
+        visibility: visible !important;
+      }
+
+      .i24fI {
+        display: none;
+        padding: 0;
+      }
+
+      /* Enhanced ConsumerUICommons.css - Modern Instagram Design */
+      .ZUqME {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      .pV7Qt {
+        border: 1px solid #dbdbdb;
+        border: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      ._41V_T {
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      ._6Rvw2 {
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+      .kv6lD {
+        border-radius: 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .Sapc9 {
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        background-color: rgba(var(--d69, 0, 149, 246), 1);
+        box-shadow: 0 4px 12px rgba(0, 149, 246, 0.3);
+        transition: all 0.3s ease;
+      }
+      .Sapc9:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 149, 246, 0.4);
+      }
+      ._6YLdr {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-color: rgba(var(--fa7, 224, 241, 255), 1);
+      }
+      .tHaIX {
+        background-color: #fafafa;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background-color: rgba(var(--b3f, 250, 250, 250), 1);
+      }
+      .QOqBd {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background-color: rgba(var(--bb2, 239, 239, 239), 1);
+      }
+      .uKI5P {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        background-color: rgba(var(--c37, 237, 73, 86), 1);
+        box-shadow: 0 4px 15px rgba(237, 73, 86, 0.3);
+      }
+      .DPiy6 {
+        background-color: #fff;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background-color: rgba(var(--d87, 255, 255, 255), 1);
+        backdrop-filter: blur(10px);
+      }
+      .IhCmn {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        background-color: rgba(var(--i1d, 38, 38, 38), 1);
+      }
+      .wpHm3 {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background-color: rgba(var(--eca, 255, 255, 255), 1);
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      }
+      .rt8eg {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        background-color: rgba(var(--aa6, 38, 38, 38), 1);
+      }
+      .qF0y9 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+      }
+      .QzzMF {
+        display: block;
+      }
+      .AC7dP {
+        display: inline-block;
+      }
+      .L84MX {
+        display: none;
+      }
+      .Zixx0 {
+        display: block;
+        overflow: hidden;
+        text-indent: 110%;
+        white-space: nowrap;
+      }
+      .lKHVe {
+        -webkit-align-content: flex-start;
+        -ms-flex-line-pack: start;
+        align-content: flex-start;
+      }
+      .vvR1w {
+        -webkit-align-content: flex-end;
+        -ms-flex-line-pack: end;
+        align-content: flex-end;
+      }
+      .fXpnZ {
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+      }
+      .yhAVL {
+        -webkit-align-content: space-between;
+        -ms-flex-line-pack: justify;
+        align-content: space-between;
+      }
+      .a65-- {
+        -webkit-align-content: space-around;
+        -ms-flex-line-pack: distribute;
+        align-content: space-around;
+      }
+      .Igw0E {
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+      }
+      ._56XdI {
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+      }
+      .Xf6Yq {
+        -webkit-box-align: end;
+        -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+        align-items: flex-end;
+      }
+      .rBNOH {
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
+      .g-fE_ {
+        -webkit-box-align: baseline;
+        -webkit-align-items: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+      }
+      .IwRSH {
+        -webkit-box-align: stretch;
+        -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+      }
+      .c4MQN {
+        -webkit-align-self: flex-start;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+      }
+      .KB4CO {
+        -webkit-align-self: flex-end;
+        -ms-flex-item-align: end;
+        align-self: flex-end;
+      }
+      .pmxbr {
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+      }
+      .b8MSm {
+        -webkit-align-self: baseline;
+        -ms-flex-item-align: baseline;
+        align-self: baseline;
+      }
+      .G71rz {
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+      }
+      .ybXk5 {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+      }
+      .q0n74 {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -webkit-flex-direction: row-reverse;
+        -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+      }
+      .j6NZI {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+        -webkit-flex-direction: column-reverse;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+      }
+      .eGOV_ {
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+      }
+      .hLiUi {
+        -webkit-box-pack: end;
+        -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+      }
+      .YBx95 {
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+      .CcYR1 {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+      }
+      .J0Xm8 {
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+      }
+      .vwCYk {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        min-height: 0;
+        min-width: 0;
+      }
+      ._4EzTm {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+      }
+      .ui_ht {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+      }
+      .YlhBV {
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+      }
+
+      /* Enhanced Margin Classes with smooth transitions */
+      .pjcA_ {
+        margin-bottom: 4px;
+        transition: margin 0.2s ease;
+      }
+      .bkEs3 {
+        margin-bottom: 8px;
+        transition: margin 0.2s ease;
+      }
+      ._22l1 {
+        margin-bottom: 12px;
+        transition: margin 0.2s ease;
+      }
+      .MGdpg {
+        margin-bottom: 16px;
+        transition: margin 0.2s ease;
+      }
+      .oxOrt {
+        margin-bottom: 20px;
+        transition: margin 0.2s ease;
+      }
+      .FBi-h {
+        margin-bottom: 24px;
+        transition: margin 0.2s ease;
+      }
+      .a39_R {
+        margin-bottom: 28px;
+        transition: margin 0.2s ease;
+      }
+      .qD5Mv {
+        margin-bottom: 32px;
+        transition: margin 0.2s ease;
+      }
+      .aftyv {
+        margin-bottom: 36px;
+        transition: margin 0.2s ease;
+      }
+      .f9hD0 {
+        margin-bottom: 40px;
+        transition: margin 0.2s ease;
+      }
+      .MGky5 {
+        margin-bottom: 44px;
+        transition: margin 0.2s ease;
+      }
+      ._7J5l7 {
+        margin-bottom: 48px;
+        transition: margin 0.2s ease;
+      }
+      .KokQV {
+        margin-bottom: 52px;
+        transition: margin 0.2s ease;
+      }
+      .bm-qU {
+        margin-bottom: 56px;
+        transition: margin 0.2s ease;
+      }
+      .oaeHW {
+        margin-bottom: 60px;
+        transition: margin 0.2s ease;
+      }
+      .U2erN {
+        margin-bottom: 64px;
+        transition: margin 0.2s ease;
+      }
+      ._7eH1b {
+        margin-bottom: 68px;
+        transition: margin 0.2s ease;
+      }
+      .gL6fO {
+        margin-bottom: auto;
+      }
+
+      /* Enhanced Left Margins */
+      .WKY0a {
+        margin-left: 4px;
+      }
+      .soMvl {
+        margin-left: 8px;
+      }
+      .n4cjz {
+        margin-left: 12px;
+      }
+      ._5VUwz {
+        margin-left: 16px;
+      }
+      .bPdm3 {
+        margin-left: 20px;
+      }
+      .XlcGs {
+        margin-left: 24px;
+      }
+      .dE4iQ {
+        margin-left: 28px;
+      }
+      .gT2s8 {
+        margin-left: 32px;
+      }
+      ._6Nb0I {
+        margin-left: 36px;
+      }
+      .CovQj {
+        margin-left: 40px;
+      }
+      .K7QFQ {
+        margin-left: 44px;
+      }
+      .Qjx67 {
+        margin-left: 48px;
+      }
+      .GsRgD {
+        margin-left: 52px;
+      }
+      .auMjJ {
+        margin-left: 56px;
+      }
+      .eYEtZ {
+        margin-left: 60px;
+      }
+      .mTDe1 {
+        margin-left: 64px;
+      }
+      .M2CRh {
+        margin-left: 68px;
+      }
+      .CIRqI {
+        margin-left: auto;
+      }
+
+      /* Enhanced Right Margins */
+      .ItkAi {
+        margin-right: 4px;
+      }
+      .JI_ht {
+        margin-right: 8px;
+      }
+      .yC0tu {
+        margin-right: 12px;
+      }
+      .y2rAt {
+        margin-right: 16px;
+      }
+      .BGYmY {
+        margin-right: 20px;
+      }
+      .ZEe2i {
+        margin-right: 24px;
+      }
+      .cb9w7 {
+        margin-right: 28px;
+      }
+      .ApndJ {
+        margin-right: 32px;
+      }
+      ._748V- {
+        margin-right: 36px;
+      }
+      .jKUp7 {
+        margin-right: 40px;
+      }
+      ._6wM3Z {
+        margin-right: 44px;
+      }
+      .Z5VSw {
+        margin-right: 48px;
+      }
+      .LHwVS {
+        margin-right: 52px;
+      }
+      .TpD3c {
+        margin-right: 56px;
+      }
+      .NNlRo {
+        margin-right: 60px;
+      }
+      .YJVmG {
+        margin-right: 64px;
+      }
+      .h_CCK {
+        margin-right: 68px;
+      }
+      .IY_1_ {
+        margin-right: auto;
+      }
+
+      /* Enhanced Top Margins */
+      .iHqQ7 {
+        margin-top: 4px;
+      }
+      .DhRcB {
+        margin-top: 8px;
+      }
+      ._49XvD {
+        margin-top: 12px;
+      }
+      .aGBdT {
+        margin-top: 16px;
+      }
+      .gKUEf {
+        margin-top: 20px;
+      }
+      .kEKum {
+        margin-top: 24px;
+      }
+      ._55Ud {
+        margin-top: 28px;
+      }
+      .dQ9Hi {
+        margin-top: 32px;
+      }
+      .UU_bp {
+        margin-top: 36px;
+      }
+      .yMvbc {
+        margin-top: 40px;
+      }
+      .lKyay {
+        margin-top: 44px;
+      }
+      .IM32b {
+        margin-top: 48px;
+      }
+      .G00MQ {
+        margin-top: 52px;
+      }
+      .KwoG5 {
+        margin-top: 56px;
+      }
+      .sn5rQ {
+        margin-top: 60px;
+      }
+      .rVxZD {
+        margin-top: 64px;
+      }
+      .aAhnZ {
+        margin-top: 68px;
+      }
+      .AxUK4 {
+        margin-top: auto;
+      }
+
+      /* Enhanced Position Classes */
+      .O1flK {
+        bottom: 0;
+      }
+      .D8xaz {
+        left: 0;
+      }
+      .fm1AK {
+        position: absolute;
+      }
+      ._7JkPY {
+        position: fixed;
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .NUiEW {
+        position: relative;
+      }
+      .TxciK {
+        right: 0;
+      }
+      .yiMZG {
+        top: 0;
+      }
+
+      /* Enhanced Overflow Classes */
+      .lDRO1 {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+      .i0EQd {
+        overflow: hidden;
+      }
+      .HNKpc {
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+      ._3g6ee {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+      ._3wFWr {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+
+      /* Enhanced Padding Classes */
+      .zQLcH {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+      .lC6p0 {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .BI4qX {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .XfCBB {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .L-sTb {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .T9mq- {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .yV-Ex {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+      .c420d {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+      ._69oMM {
+        padding-left: 36px;
+        padding-right: 36px;
+      }
+      .pwoi_ {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      ._9Gu4M {
+        padding-left: 44px;
+        padding-right: 44px;
+      }
+      .iNp2o {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+      .XTCZH {
+        padding-bottom: 4px;
+        padding-top: 4px;
+      }
+      .HVWg4 {
+        padding-bottom: 8px;
+        padding-top: 8px;
+      }
+      .qJPeX {
+        padding-bottom: 12px;
+        padding-top: 12px;
+      }
+      .g6RW6 {
+        padding-bottom: 16px;
+        padding-top: 16px;
+      }
+      .HcJZg {
+        padding-bottom: 20px;
+        padding-top: 20px;
+      }
+      .nGS-Y {
+        padding-bottom: 24px;
+        padding-top: 24px;
+      }
+      .zPcO_ {
+        padding-bottom: 28px;
+        padding-top: 28px;
+      }
+      .D8UUo {
+        padding-bottom: 32px;
+        padding-top: 32px;
+      }
+      .qJdj7 {
+        padding-bottom: 36px;
+        padding-top: 36px;
+      }
+      .xUzvG {
+        padding-bottom: 40px;
+        padding-top: 40px;
+      }
+      .sKZwS {
+        padding-bottom: 44px;
+        padding-top: 44px;
+      }
+      .PUBS- {
+        padding-bottom: 48px;
+        padding-top: 48px;
+      }
+
+      /* Enhanced Button Classes with Modern Instagram Design */
+      .sqdOP {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        border: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        font-weight: 600;
+        padding: 8px 16px;
+        text-align: center;
+        text-transform: inherit;
+        text-overflow: ellipsis;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width: auto;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .sqdOP::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+      }
+      .sqdOP:hover::before {
+        left: 100%;
+      }
+      .sqdOP:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      .sqdOP[disabled],
+      a.sqdOP[disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+        background: #dbdbdb;
+      }
+      .sqdOP[disabled]:not(.A086a) {
+        opacity: 0.3;
+      }
+
+      /* Enhanced Button Variants */
+      .L3NKy,
+      a.L3NKy,
+      a.L3NKy:visited {
+        border-radius: 8px;
+        color: #fff;
+        color: rgba(var(--eca, 255, 255, 255), 1);
+        position: relative;
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+      }
+      .L3NKy:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      }
+      ._4pI4F {
+        width: 100%;
+      }
+      .sH_mn,
+      a.sH_mn,
+      a.sH_mn:visited {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        border: 2px solid #ed4956;
+        border: 2px solid rgba(var(--i30, 237, 73, 86), 1);
+        color: #ed4956;
+        color: rgba(var(--i30, 237, 73, 86), 1);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      .sH_mn:hover {
+        background: #ed4956;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(237, 73, 86, 0.3);
+      }
+      .y3zKF:not(.yWX7d),
+      a.y3zKF:not(.yWX7d),
+      a.y3zKF:not(.yWX7d):visited {
+        border: 1px solid transparent;
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        background-color: rgba(var(--d69, 0, 149, 246), 1);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .y3zKF:hover:not(.yWX7d) {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(0, 149, 246, 0.4);
+      }
+      .y3zKF:active:not(.yWX7d),
+      a.y3zKF:active:not(.yWX7d),
+      a.y3zKF:active:not(.yWX7d):visited {
+        background-color: rgba(0, 149, 246, 0.7);
+        background-color: rgba(var(--d69, 0, 149, 246), 0.7);
+        opacity: 1;
+        transform: translateY(1px);
+      }
+      .y3zKF[disabled]:not(.yWX7d):not(.A086a),
+      a.y3zKF[disabled]:not(.yWX7d):not(.A086a),
+      a.y3zKF[disabled]:not(.yWX7d):not(.A086a):visited {
+        background-color: rgba(0, 149, 246, 0.3);
+        background-color: rgba(var(--d69, 0, 149, 246), 0.3);
+        opacity: 1;
+      }
+      ._8A5w5,
+      a._8A5w5,
+      a._8A5w5:visited {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border: 1px solid #dbdbdb;
+        border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+        color: #262626;
+        color: rgba(var(--f75, 38, 38, 38), 1);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      ._8A5w5:hover {
+        background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .y1rQx,
+      a.y1rQx,
+      a.y1rQx:visited {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid #fff;
+        border: 2px solid rgba(var(--eca, 255, 255, 255), 1);
+        color: #fff;
+        color: rgba(var(--eca, 255, 255, 255), 1);
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+      .y1rQx:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+      }
+      .cB_4K {
+        padding: 14px 24px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .yWX7d,
+      .yWX7d:visited,
+      a.yWX7d,
+      a.yWX7d:visited {
+        border: 0;
+        color: #0095f6;
+        color: rgba(var(--d69, 0, 149, 246), 1);
+        display: inline;
+        padding: 0;
+        position: relative;
+        background: none;
+        transition: color 0.2s ease;
+      }
+      .yWX7d:hover {
+        color: #1877f2;
+        text-decoration: underline;
+      }
+      .yWX7d.sH_mn,
+      a.yWX7d.sH_mn,
+      a.yWX7d.sH_mn:visited {
+        color: #ed4956;
+        color: rgba(var(--i30, 237, 73, 86), 1);
+      }
+      .yWX7d._8A5w5,
+      a.yWX7d._8A5w5,
+      a.yWX7d._8A5w5:visited {
+        color: #262626;
+        color: rgba(var(--f75, 38, 38, 38), 1);
+      }
+      .yWX7d.y1rQx,
+      a.yWX7d.y1rQx,
+      a.yWX7d.y1rQx:visited {
+        color: #fff;
+        color: rgba(var(--eca, 255, 255, 255), 1);
+      }
+      .ZIAjV {
+        -webkit-user-select: auto;
+        -moz-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
+      }
+      .yWX7d.A086a,
+      .A086a,
+      a.yWX7d.A086a,
+      a.A086a {
+        color: transparent;
+      }
+
+      /* Enhanced Theme Variables with Modern Instagram Colors */
+      .ekjoN,
+      .sDN5V {
+        --f52: 142, 142, 142;
+        --h1d: 255, 255, 255;
+        --de5: 255, 255, 255;
+        --d69: 64, 93, 230;
+        --b86: 88, 195, 34;
+        --i30: 237, 73, 86;
+        --d62: 255, 255, 255;
+        --e4f: 54, 54, 54;
+        --a72: 255, 255, 255;
+        --ie3: 142, 142, 142;
+        --c37: 237, 73, 86;
+        --f24: 64, 93, 230;
+        --jbb: 88, 81, 219;
+        --eca: 255, 255, 255;
+        --jb7: 0, 0, 0;
+        --fa7: 224, 241, 255;
+        --aa6: 38, 38, 38;
+        --ba8: 168, 168, 168;
+        --eac: 237, 73, 86;
+      }
+      .sDN5V {
+        --i1d: 38, 38, 38;
+        --edc: 199, 199, 199;
+        --f75: 38, 38, 38;
+        --fe0: 0, 55, 107;
+        --d87: 255, 255, 255;
+        --b3f: 250, 250, 250;
+        --bb2: 239, 239, 239;
+        --f23: 255, 255, 255;
+        --b38: 219, 219, 219;
+        --b6a: 219, 219, 219;
+        --ca6: 219, 219, 219;
+        --cdd: 38, 38, 38;
+        --e22: 199, 199, 199;
+        --e62: 245, 251, 255;
+        --b2f: 88, 195, 34;
+        --c8c: 168, 168, 168;
+        --ce3: 239, 239, 239;
+        --jd9: 0, 0, 0;
+        --j64: 54, 54, 54;
+        --a97: 243, 243, 243;
+        --d20: 38, 38, 38;
+      }
+      .ekjoN {
+        --i1d: 250, 250, 250;
+        --edc: 115, 115, 115;
+        --f75: 250, 250, 250;
+        --fe0: 224, 241, 255;
+        --d87: 0, 0, 0;
+        --b3f: 18, 18, 18;
+        --bb2: 38, 38, 38;
+        --f23: 38, 38, 38;
+        --b38: 38, 38, 38;
+        --b6a: 54, 54, 54;
+        --ca6: 54, 54, 54;
+        --cdd: 250, 250, 250;
+        --e22: 115, 115, 115;
+        --e62: 64, 93, 230;
+        --b2f: 55, 166, 0;
+        --c8c: 85, 85, 85;
+        --ce3: 38, 38, 38;
+        --jd9: 255, 255, 255;
+        --j64: 219, 219, 219;
+        --a97: 38, 38, 38;
+        --d20: 250, 250, 250;
+      }
+
+      /* Enhanced Spinner Animations */
+      @-webkit-keyframes IGCoreSpinnerSpin8 {
+        0% {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        to {
+          -webkit-transform: rotate(540deg);
+          transform: rotate(540deg);
+        }
+      }
+      @keyframes IGCoreSpinnerSpin8 {
+        0% {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+        to {
+          -webkit-transform: rotate(540deg);
+          transform: rotate(540deg);
+        }
+      }
+      @-webkit-keyframes IGCoreSpinnerSpin12 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes IGCoreSpinnerSpin12 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      .FSiF6 {
+        -webkit-animation: IGCoreSpinnerSpin8 0.8s steps(8) infinite;
+        animation: IGCoreSpinnerSpin8 0.8s steps(8) infinite;
+      }
+      .By4nA {
+        -webkit-animation: IGCoreSpinnerSpin12 1.2s steps(12) infinite;
+        animation: IGCoreSpinnerSpin12 1.2s steps(12) infinite;
+      }
+      .By4nA.ZyL7E,
+      .FSiF6.ZyL7E {
+        -webkit-animation: none;
+        animation: none;
+      }
+      ._9qQ0O {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      /* Enhanced Avatar and Circle Classes */
+      .FuWoR {
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        border-radius: 50%;
+        border-style: solid;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .FuWoR:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      }
+      .-wdIA {
+        border-color: #262626;
+      }
+      .j44N4 {
+        border-color: #dbdbdb;
+        border-color: rgba(var(--b6a, 219, 219, 219), 1);
+      }
+      .zUbsF {
+        border-color: #4f67b0;
+      }
+      .Bww6x {
+        border-color: #fff;
+      }
+      .zlwcS,
+      .x7xX2 {
+        border-width: 2px;
+      }
+      .A2kdl {
+        border-width: 3px;
+      }
+
+      /* Enhanced Media Queries */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+        .x7xX2 {
+          border: 0;
+        }
+        .x7xX2::after {
+          border-radius: 50%;
+          border: 3px solid;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          content: "";
+          height: 200%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          -webkit-transform-origin: top left;
+          transform-origin: top left;
+          -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+          width: 200%;
+        }
+        .j44N4.x7xX2::after {
+          border-color: #dbdbdb;
+          border-color: rgba(var(--b6a, 219, 219, 219), 1);
+        }
+        .-wdIA.x7xX2::after {
+          border-color: #262626;
+        }
+        .zUbsF.x7xX2::after {
+          border-color: #4f67b0;
+        }
+        .Bww6x.x7xX2::after {
+          border-color: #fff;
+        }
+      }
+      .u-__7 {
+        display: block;
+      }
+
+      /* Modern Typography & Body Styles */
+      body {
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #262626;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Modern Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #405de6, #5851db);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #5851db, #833ab4);
+      }
+
+      /* Enhanced Focus States */
+      *:focus {
+        outline: 2px solid #405de6;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Modern Card Effects */
+      .card-effect {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .card-effect:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Glassmorphism Effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+      }
+
+      /* Modern Input Styles */
+      input[type="text"], input[type="password"], input[type="email"] {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(219, 219, 219, 0.5);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+        border-color: #405de6;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 0 3px rgba(64, 93, 230, 0.1);
+        transform: translateY(-1px);
+      }
+
+      /* Enhanced Animation Utilities */
+      .fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+      .slide-up {
+        animation: slideUp 0.6s ease-out;
+      }
+      .bounce-in {
+        animation: bounceIn 0.8s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes bounceIn {
+        0% { opacity: 0; transform: scale(0.3); }
+        50% { opacity: 1; transform: scale(1.05); }
+        70% { transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+
+      /* Modern Gradient Text */
+      .gradient-text {
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+      }
+
+      /* Modern Shadow Utilities */
+      .shadow-sm { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .shadow-md { box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
+      .shadow-lg { box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+      .shadow-xl { box-shadow: 0 16px 32px rgba(0,0,0,0.2); }
+
+      /* Modern Color Utilities */
+      .text-gradient { background: linear-gradient(45deg, #405de6, #833ab4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .bg-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+      .bg-instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
     </style>
 </head>
 
 <body>
-    <!-- LOGIN PAGE -->
-    <div id="loginPage" class="login-wrapper">
-        <div class="login-content">
-            <!-- Phone Mockup -->
-            <div class="login-left">
-                <div class="phone-mockup">
-                    <div class="screenshot-slider">
-                        <div class="screenshot active"></div>
-                        <div class="screenshot"></div>
-                        <div class="screenshot"></div>
-                    </div>
-                </div>
+    <!-- Your exact same HTML structure with enhanced styling -->
+    <div class="qF0y9 rBNOH YBx95 fade-in" style="min-height: 100vh; padding: 20px;">
+        <div class="card-effect" style="max-width: 400px; width: 100%; padding: 40px;">
+            <div class="YBx95 MGdpg">
+                <h1 class="gradient-text" style="font-size: 48px; margin: 0;">Instagram</h1>
             </div>
-
-            <!-- Login Form -->
-            <div class="login-right">
-                <div class="login-box">
-                    <div class="instagram-logo">
-                        <img src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="Instagram">
-                    </div>
-
-                    <form class="login-form" id="loginForm">
-                        <div class="form-group">
-                            <input type="text" class="form-input" id="username" placeholder="Phone number, username, or email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-input" id="password" placeholder="Password" required>
-                            <button type="button" class="password-toggle" id="passwordToggle">Show</button>
-                        </div>
-                        <button type="submit" class="sqdOP y3zKF">Log in</button>
-                    </form>
-
-                    <div class="or-divider">
-                        <span>OR</span>
-                    </div>
-
-                    <a href="#" class="facebook-login">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#385185">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                        Log in with Facebook
-                    </a>
-
-                    <a href="#" class="forgot-password">Forgot password?</a>
+            
+            <form class="fade-in" style="animation-delay: 0.2s;">
+                <div class="MGdpg">
+                    <input type="text" placeholder="Phone number, username, or email" class="sqdOP" style="background: rgba(250, 250, 250, 0.9); color: #262626; border: 1px solid #dbdbdb; margin-bottom: 8px;">
                 </div>
-
-                <div class="signup-box">
-                    <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+                <div class="MGdpg">
+                    <input type="password" placeholder="Password" class="sqdOP" style="background: rgba(250, 250, 250, 0.9); color: #262626; border: 1px solid #dbdbdb; margin-bottom: 8px;">
                 </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <p style="font-size: 14px; margin-bottom: 20px;">Get the app.</p>
-                    <div style="display: flex; gap: 8px; justify-content: center;">
-                        <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="Get it on Google Play" height="40">
-                        <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Get it from Microsoft" height="40">
-                    </div>
+                <div class="MGdpg">
+                    <button type="submit" class="sqdOP y3zKF _4pI4F cB_4K" style="color: white; font-size: 14px;">Log in</button>
                 </div>
+            </form>
+            
+            <div class="qF0y9 rBNOH YBx95 MGdpg" style="position: relative;">
+                <div style="flex: 1; height: 1px; background: #dbdbdb;"></div>
+                <div style="padding: 0 16px; color: #8e8e8e; font-weight: 600; font-size: 13px;">OR</div>
+                <div style="flex: 1; height: 1px; background: #dbdbdb;"></div>
+            </div>
+            
+            <div class="YBx95 MGdpg">
+                <a href="#" class="yWX7d" style="color: #385185; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#385185">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Log in with Facebook
+                </a>
+            </div>
+            
+            <div class="YBx95">
+                <a href="#" class="yWX7d" style="color: #00376b; font-size: 12px; text-decoration: none;">Forgot password?</a>
+            </div>
+        </div>
+        
+        <div class="card-effect fade-in kEKum" style="max-width: 400px; width: 100%; padding: 20px; text-align: center; animation-delay: 0.4s;">
+            <p style="font-size: 14px; margin: 0;">Don't have an account? <a href="#" class="signup-link gradient-text" style="font-weight: 600; text-decoration: none;">Sign up</a></p>
+        </div>
+        
+        <div class="YBx95 kEKum fade-in" style="animation-delay: 0.6s;">
+            <p style="font-size: 14px; margin-bottom: 20px;">Get the app.</p>
+            <div class="qF0y9 YBx95" style="gap: 8px;">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="Get it on Google Play" style="height: 40px; border-radius: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Get it from Microsoft" style="height: 40px; border-radius: 8px; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP -->
-    <div id="mainApp" class="main-app">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <img src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="Instagram">
-                </div>
-
-                <div class="nav-search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search">
-                </div>
-
-                <div class="nav-actions">
-                    <a href="#" class="nav-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.003 2.001a9.705 9.705 0 1 1 0 19.4 10.876 10.876 0 0 1-2.895-.384.798.798 0 0 0-.533.04l-1.984.876a.801.801 0 0 1-1.123-.708l-.054-1.78a.806.806 0 0 0-.27-.569 9.49 9.49 0 0 1-3.14-7.175 9.65 9.65 0 0 1 10-9.7Z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none"/>
-                            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"/>
-                            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="nav-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <circle cx="12.001" cy="12.005" fill="none" r="10.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                            <circle cx="10.5" cy="8.5" fill="currentColor" r="1.5"/>
-                            <circle cx="8.5" cy="13.5" fill="currentColor" r="1.5"/>
-                            <circle cx="13.5" cy="13.5" fill="currentColor" r="1.5"/>
-                            <circle cx="15.5" cy="8.5" fill="currentColor" r="1.5"/>
-                        </svg>
-                    </a>
-                    <div class="profile-dropdown">
-                        <img src="https://i.pravatar.cc/24" alt="Profile" class="profile-pic">
-                        <div class="dropdown-menu">
-                            <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12.004" cy="12.004" r="10.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M18.793 20.014a6.08 6.08 0 0 0-1.778-2.447 3.991 3.991 0 0 0-2.386-.791H9.38a3.994 3.994 0 0 0-2.386.791 6.09 6.09 0 0 0-1.779 2.447" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="12.006" cy="9.718" fill="none" r="4.109" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>Profile</a>
-                            <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>Saved</a>
-                            <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" fill="none" r="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>Settings</a>
-                            <a href="#" id="logoutBtn">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="content-feed">
-                <!-- Stories -->
-                <section class="stories-container">
-                    <div class="story-item">
-                        <div class="story-avatar">
-                            <img src="https://i.pravatar.cc/60" alt="Your Story">
-                            <div class="add-story-btn">+</div>
-                        </div>
-                        <span class="story-username">Your Story</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar viewed">
-                            <img src="https://i.pravatar.cc/60?img=1" alt="User Story">
-                        </div>
-                        <span class="story-username">user_name1</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar">
-                            <img src="https://i.pravatar.cc/60?img=2" alt="User Story">
-                        </div>
-                        <span class="story-username">user_name2</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar">
-                            <img src="https://i.pravatar.cc/60?img=3" alt="User Story">
-                        </div>
-                        <span class="story-username">user_name3</span>
-                    </div>
-                </section>
-
-                <!-- Posts -->
-                <section class="posts-feed">
-                    <article class="post">
-                        <header class="post-header">
-                            <div class="post-user">
-                                <img src="https://i.pravatar.cc/32?img=4" alt="User" class="post-avatar">
-                                <div>
-                                    <div class="post-username">nature_lover</div>
-                                    <div class="post-location">Himachal Pradesh</div>
-                                </div>
-                            </div>
-                            <button class="post-options">⋯</button>
-                        </header>
-
-                        <div class="post-media">
-                            <img src="https://picsum.photos/470/470?random=1" alt="Post Image">
-                        </div>
-
-                        <div class="post-actions">
-                            <div class="action-buttons">
-                                <button class="action-btn like-btn" data-liked="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn comment-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn share-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"/>
-                                        <polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="action-btn save-btn" data-saved="false">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="post-info">
-                            <div class="likes-count">1,234 likes</div>
-                            <div class="post-caption">
-                                <span class="post-username">nature_lover</span> 
-                                Beautiful sunrise from the mountains! 🌄 #nature #mountains #sunrise
-                            </div>
-                            <button class="view-comments">View all 45 comments</button>
-                            <div class="post-time">2 hours ago</div>
-                        </div>
-
-                        <div class="comment-section">
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">Post</button>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <header class="post-header">
-                            <div class="post-user">
-                                <img src="https://i.pravatar.cc/32?img=5" alt="User" class="post-avatar">
-                                <div>
-                                    <div class="post-username">food_explorer</div>
-                                    <div class="post-location">Mumbai, India</div>
-                                </div>
-                            </div>
-                            <button class="post-options">⋯</button>
-                        </header>
-
-                        <div class="post-media">
-                            <img src="https://picsum.photos/470/470?random=2" alt="Post Image">
-                        </div>
-
-                        <div class="post-actions">
-                            <div class="action-buttons">
-                                <button class="action-btn like-btn" data-liked="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn comment-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn share-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"/>
-                                        <polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="action-btn save-btn" data-saved="false">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="post-info">
-                            <div class="likes-count">856 likes</div>
-                            <div class="post-caption">
-                                <span class="post-username">food_explorer</span> 
-                                Delicious street food! 🍲 #streetfood #mumbai #foodie
-                            </div>
-                            <button class="view-comments">View all 23 comments</button>
-                            <div class="post-time">5 hours ago</div>
-                        </div>
-
-                        <div class="comment-section">
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">Post</button>
-                        </div>
-                    </article>
-                </section>
-            </div>
-
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="user-card">
-                    <img src="https://i.pravatar.cc/56" alt="Your Profile" class="user-avatar">
-                    <div class="user-details">
-                        <span class="username">your_username</span>
-                        <span class="fullname">Your Full Name</span>
-                    </div>
-                    <button class="switch-btn">Switch</button>
-                </div>
-
-                <div class="suggestions">
-                    <div class="suggestions-header">
-                        <span class="suggestions-title">Suggestions For You</span>
-                        <a href="#" class="see-all">See All</a>
-                    </div>
-                    
-                    <div class="suggestion-item">
-                        <img src="https://i.pravatar.cc/32?img=6" alt="Suggested User" class="suggestion-avatar">
-                        <div class="suggestion-info">
-                            <span class="suggestion-username">suggested_user1</span>
-                            <span class="suggestion-relation">Follows you</span>
-                        </div>
-                        <button class="follow-btn">Follow</button>
-                    </div>
-                    
-                    <div class="suggestion-item">
-                        <img src="https://i.pravatar.cc/32?img=7" alt="Suggested User" class="suggestion-avatar">
-                        <div class="suggestion-info">
-                            <span class="suggestion-username">suggested_user2</span>
-                            <span class="suggestion-relation">Popular</span>
-                        </div>
-                        <button class="follow-btn">Follow</button>
-                    </div>
-
-                    <div class="suggestion-item">
-                        <img src="https://i.pravatar.cc/32?img=8" alt="Suggested User" class="suggestion-avatar">
-                        <div class="suggestion-info">
-                            <span class="suggestion-username">suggested_user3</span>
-                            <span class="suggestion-relation">New to Instagram</span>
-                        </div>
-                        <button class="follow-btn">Follow</button>
-                    </div>
-                </div>
-
-                <div style="color: var(--ig-text-light); font-size: 11px; margin-top: 32px;">
-                    <div style="margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 4px 16px;">
-                        <a href="#" style="color: inherit; text-decoration: none;">About</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Help</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Press</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">API</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Jobs</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Privacy</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Terms</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Locations</a>
-                        <a href="#" style="color: inherit; text-decoration: none;">Language</a>
-                    </div>
-                    <div>© 2025 INSTAGRAM FROM META</div>
-                </div>
-            </aside>
-        </main>
-    </div>
-
     <script>
-        // Instagram Clone App - Enhanced from Ali Milani Amin's structure
-        class InstagramApp {
-            constructor() {
-                this.isLoggedIn = localStorage.getItem('ig_logged_in') === 'true';
-                this.currentUser = JSON.parse(localStorage.getItem('ig_user') || '{}');
-                this.screenshotIndex = 0;
-                this.screenshots = document.querySelectorAll('.screenshot');
-                
-                this.init();
-            }
-
-            init() {
-                // Show appropriate page
-                if (this.isLoggedIn) {
-                    this.showMainApp();
-                } else {
-                    this.showLoginPage();
-                }
-
-                this.setupEventListeners();
-                this.startScreenshotSlider();
-                this.setupPostInteractions();
-            }
-
-            setupEventListeners() {
-                // Login form
-                const loginForm = document.getElementById('loginForm');
-                loginForm?.addEventListener('submit', (e) => this.handleLogin(e));
-
-                // Password toggle
-                const passwordToggle = document.getElementById('passwordToggle');
-                passwordToggle?.addEventListener('click', () => this.togglePassword());
-
-                // Logout
-                const logoutBtn = document.getElementById('logoutBtn');
-                logoutBtn?.addEventListener('click', (e) => this.handleLogout(e));
-
-                // Profile dropdown
-                const profilePic = document.querySelector('.profile-pic');
-                const dropdownMenu = document.querySelector('.dropdown-menu');
-                
-                profilePic?.addEventListener('click', () => {
-                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-                });
-
-                // Close dropdown when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.profile-dropdown') && dropdownMenu) {
-                        dropdownMenu.style.display = 'none';
-                    }
-                });
-
-                // Search functionality
-                const searchInput = document.querySelector('.nav-search input');
-                searchInput?.addEventListener('input', (e) => this.handleSearch(e.target.value));
-
-                // Story clicks
-                document.querySelectorAll('.story-item').forEach(story => {
-                    story.addEventListener('click', () => this.viewStory(story));
-                });
-            }
-
-            handleLogin(e) {
+        // Your exact same JavaScript functionality with enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced form submission with modern effects
+            const form = document.querySelector('form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const username = document.getElementById('username').value.trim();
-                const password = document.getElementById('password').value.trim();
-
-                if (username && password) {
-                    // Simulate login validation
-                    if (username.length >= 3 && password.length >= 6) {
-                        this.currentUser = {
-                            username: username,
-                            fullName: 'User Name',
-                            avatar: `https://i.pravatar.cc/56?u=${username}`
-                        };
-                        
-                        this.isLoggedIn = true;
-                        localStorage.setItem('ig_logged_in', 'true');
-                        localStorage.setItem('ig_user', JSON.stringify(this.currentUser));
-                        
-                        this.showMainApp();
-                        this.showNotification('Welcome back!', 'success');
-                    } else {
-                        this.showNotification('Invalid credentials. Try with longer username/password.', 'error');
-                    }
-                } else {
-                    this.showNotification('Please fill in all fields.', 'error');
-                }
-            }
-
-            handleLogout(e) {
-                e.preventDefault();
+                // Add loading effect
+                const originalText = submitBtn.textContent;
+                submitBtn.innerHTML = '<div class="FSiF6" style="width: 20px; height: 20px; border: 2px solid #ffffff; border-top: 2px solid transparent; border-radius: 50%; margin: 0 auto;"></div>';
+                submitBtn.disabled = true;
                 
-                this.isLoggedIn = false;
-                this.currentUser = {};
-                localStorage.removeItem('ig_logged_in');
-                localStorage.removeItem('ig_user');
-                
-                this.showLoginPage();
-                this.showNotification('You have been logged out.', 'info');
-            }
-
-            showMainApp() {
-                const loginPage = document.getElementById('loginPage');
-                const mainApp = document.getElementById('mainApp');
-                
-                if (loginPage) loginPage.style.display = 'none';
-                if (mainApp) mainApp.style.display = 'block';
-                
-                // Update user info in sidebar
-                this.updateUserProfile();
-            }
-
-            showLoginPage() {
-                const loginPage = document.getElementById('loginPage');
-                const mainApp = document.getElementById('mainApp');
-                
-                if (loginPage) loginPage.style.display = 'block';
-                if (mainApp) mainApp.style.display = 'none';
-            }
-
-            updateUserProfile() {
-                const userAvatar = document.querySelector('.user-avatar');
-                const username = document.querySelector('.user-details .username');
-                const fullname = document.querySelector('.user-details .fullname');
-                const profilePic = document.querySelector('.profile-pic');
-
-                if (userAvatar && this.currentUser.avatar) {
-                    userAvatar.src = this.currentUser.avatar;
-                }
-                if (profilePic && this.currentUser.avatar) {
-                    profilePic.src = this.currentUser.avatar;
-                }
-                if (username && this.currentUser.username) {
-                    username.textContent = this.currentUser.username;
-                }
-                if (fullname && this.currentUser.fullName) {
-                    fullname.textContent = this.currentUser.fullName;
-                }
-            }
-
-            togglePassword() {
-                const passwordInput = document.getElementById('password');
-                const passwordToggle = document.getElementById('passwordToggle');
-                
-                if (passwordInput && passwordToggle) {
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        passwordToggle.textContent = 'Hide';
-                    } else {
-                        passwordInput.type = 'password';
-                        passwordToggle.textContent = 'Show';
-                    }
-                }
-            }
-
-            startScreenshotSlider() {
-                if (this.screenshots.length === 0) return;
-
-                setInterval(() => {
-                    this.screenshots[this.screenshotIndex]?.classList.remove('active');
-                    this.screenshotIndex = (this.screenshotIndex + 1) % this.screenshots.length;
-                    this.screenshots[this.screenshotIndex]?.classList.add('active');
-                }, 3000);
-            }
-
-            setupPostInteractions() {
-                // Like buttons
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('.like-btn')) {
-                        this.toggleLike(e.target.closest('.like-btn'));
-                    }
-                    
-                    if (e.target.closest('.save-btn')) {
-                        this.toggleSave(e.target.closest('.save-btn'));
-                    }
-
-                    if (e.target.closest('.follow-btn')) {
-                        this.toggleFollow(e.target.closest('.follow-btn'));
-                    }
-
-                    if (e.target.closest('.comment-submit')) {
-                        this.submitComment(e.target.closest('.comment-submit'));
-                    }
-                });
-
-                // Comment input enter key
-                document.addEventListener('keypress', (e) => {
-                    if (e.target.matches('.comment-input') && e.key === 'Enter') {
-                        const submitBtn = e.target.nextElementSibling;
-                        if (submitBtn) this.submitComment(submitBtn);
-                    }
-                });
-            }
-
-            toggleLike(button) {
-                const isLiked = button.dataset.liked === 'true';
-                const post = button.closest('.post');
-                const likesCount = post?.querySelector('.likes-count');
-                const heartSvg = button.querySelector('svg path');
-                
-                if (isLiked) {
-                    button.dataset.liked = 'false';
-                    button.classList.remove('liked');
-                    if (heartSvg) heartSvg.setAttribute('fill', 'none');
-                    if (heartSvg) heartSvg.setAttribute('stroke', 'currentColor');
-                    if (heartSvg) heartSvg.setAttribute('stroke-width', '2');
-                    
-                    // Decrease like count
-                    if (likesCount) {
-                        const currentLikes = parseInt(likesCount.textContent.replace(/,/g, ''));
-                        likesCount.textContent = `${(currentLikes - 1).toLocaleString()} likes`;
-                    }
-                } else {
-                    button.dataset.liked = 'true';
-                    button.classList.add('liked');
-                    if (heartSvg) heartSvg.setAttribute('fill', '#ed4956');
-                    if (heartSvg) heartSvg.removeAttribute('stroke');
-                    if (heartSvg) heartSvg.removeAttribute('stroke-width');
-                    
-                    // Add animation
-                    button.classList.add('animate');
-                    setTimeout(() => button.classList.remove('animate'), 300);
-                    
-                    // Increase like count
-                    if (likesCount) {
-                        const currentLikes = parseInt(likesCount.textContent.replace(/,/g, ''));
-                        likesCount.textContent = `${(currentLikes + 1).toLocaleString()} likes`;
-                    }
-                }
-            }
-
-            toggleSave(button) {
-                const isSaved = button.dataset.saved === 'true';
-                const saveSvg = button.querySelector('svg polygon');
-                
-                if (isSaved) {
-                    button.dataset.saved = 'false';
-                    button.classList.remove('saved');
-                    if (saveSvg) saveSvg.setAttribute('fill', 'none');
-                    this.showNotification('Post removed from saved', 'info');
-                } else {
-                    button.dataset.saved = 'true';
-                    button.classList.add('saved');
-                    if (saveSvg) saveSvg.setAttribute('fill', 'currentColor');
-                    this.showNotification('Post saved', 'success');
-                }
-            }
-
-            toggleFollow(button) {
-                if (button.textContent === 'Follow') {
-                    button.textContent = 'Following';
-                    button.style.color = 'var(--ig-text-light)';
-                    this.showNotification('Now following!', 'success');
-                } else {
-                    button.textContent = 'Follow';
-                    button.style.color = 'var(--ig-primary-button)';
-                }
-            }
-
-            submitComment(button) {
-                const commentInput = button.previousElementSibling;
-                const commentText = commentInput?.value.trim();
-                
-                if (commentText && commentText.length > 0) {
-                    const post = button.closest('.post');
-                    const viewCommentsBtn = post?.querySelector('.view-comments');
-                    
-                    // Update comments count
-                    if (viewCommentsBtn) {
-                        const currentCount = parseInt(viewCommentsBtn.textContent.match(/\d+/)?.[0] || 0);
-                        viewCommentsBtn.textContent = `View all ${currentCount + 1} comments`;
-                    }
-                    
-                    // Clear input
-                    commentInput.value = '';
-                    
-                    this.showNotification('Comment added!', 'success');
-                }
-            }
-
-            handleSearch(query) {
-                if (query.length > 0) {
-                    // Simulate search functionality
-                    console.log('Searching for:', query);
-                    // In a real app, this would make API calls
-                }
-            }
-
-            viewStory(storyElement) {
-                const username = storyElement.querySelector('.story-username')?.textContent;
-                this.showNotification(`Viewing ${username}'s story`, 'info');
-                // In a real app, this would open story viewer
-            }
-
-            showNotification(message, type = 'info') {
-                // Create notification element
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    padding: 12px 16px;
-                    border-radius: 8px;
-                    color: white;
-                    font-weight: 500;
-                    z-index: 10000;
-                    animation: slideIn 0.3s ease-out;
-                    min-width: 200px;
-                    text-align: center;
-                `;
-
-                // Set background color based on type
-                switch (type) {
-                    case 'success':
-                        notification.style.backgroundColor = '#00c896';
-                        break;
-                    case 'error':
-                        notification.style.backgroundColor = '#ed4956';
-                        break;
-                    case 'info':
-                    default:
-                        notification.style.backgroundColor = '#0095f6';
-                        break;
-                }
-
-                notification.textContent = message;
-                document.body.appendChild(notification);
-
-                // Remove notification after 3 seconds
+                // Simulate login process
                 setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Add success effect
+                    submitBtn.style.background = 'linear-gradient(45deg, #00c896, #00a085)';
+                    submitBtn.textContent = 'Success!';
+                    
                     setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-
-            // Simulate loading more posts
-            loadMorePosts() {
-                const postsContainer = document.querySelector('.posts-feed');
-                const newPost = this.createPostElement({
-                    username: 'new_user',
-                    location: 'New Location',
-                    image: `https://picsum.photos/470/470?random=${Date.now()}`,
-                    likes: Math.floor(Math.random() * 1000) + 100,
-                    caption: 'New amazing post! 📸',
-                    comments: Math.floor(Math.random() * 50) + 10,
-                    timeAgo: 'Just now'
+                        submitBtn.style.background = '';
+                        submitBtn.textContent = originalText;
+                    }, 2000);
+                }, 2000);
+            });
+            
+            // Enhanced input focus effects
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 4px 12px rgba(64, 93, 230, 0.2)';
                 });
                 
-                if (postsContainer) {
-                    postsContainer.appendChild(newPost);
-                }
-            }
-
-            createPostElement(postData) {
-                const postHTML = `
-                    <article class="post">
-                        <header class="post-header">
-                            <div class="post-user">
-                                <img src="https://i.pravatar.cc/32?u=${postData.username}" alt="User" class="post-avatar">
-                                <div>
-                                    <div class="post-username">${postData.username}</div>
-                                    <div class="post-location">${postData.location}</div>
-                                </div>
-                            </div>
-                            <button class="post-options">⋯</button>
-                        </header>
-
-                        <div class="post-media">
-                            <img src="${postData.image}" alt="Post Image">
-                        </div>
-
-                        <div class="post-actions">
-                            <div class="action-buttons">
-                                <button class="action-btn like-btn" data-liked="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn comment-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                                <button class="action-btn share-btn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218" y1="3" y2="10.083"/>
-                                        <polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="action-btn save-btn" data-saved="false">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <div class="post-info">
-                            <div class="likes-count">${postData.likes} likes</div>
-                            <div class="post-caption">
-                                <span class="post-username">${postData.username}</span> 
-                                ${postData.caption}
-                            </div>
-                            <button class="view-comments">View all ${postData.comments} comments</button>
-                            <div class="post-time">${postData.timeAgo}</div>
-                        </div>
-
-                        <div class="comment-section">
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">Post</button>
-                        </div>
-                    </article>
-                `;
-                
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = postHTML;
-                return tempDiv.firstElementChild;
-            }
-        }
-
-        // Initialize the Instagram app
-        document.addEventListener('DOMContentLoaded', () => {
-            window.instagramApp = new InstagramApp();
-        });
-
-        // Add CSS animations dynamically
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { opacity: 0; transform: translateX(300px); }
-                to { opacity: 1; transform: translateX(0); }
-            }
-            @keyframes slideOut {
-                from { opacity: 1; transform: translateX(0); }
-                to { opacity: 0; transform: translateX(300px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Service Worker for PWA (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => console.log('SW registered:', registration))
-                    .catch(error => console.log('SW registration failed:', error));
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '';
+                });
             });
-        }
+            
+            // Enhanced hover effects for links
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-1px)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add floating animation to main container
+            const mainContainer = document.querySelector('.card-effect');
+            setInterval(() => {
+                mainContainer.style.transform = 'translateY(-2px)';
+                setTimeout(() => {
+                    mainContainer.style.transform = 'translateY(2px)';
+                    setTimeout(() => {
+                        mainContainer.style.transform = 'translateY(0)';
+                    }, 2000);
+                }, 2000);
+            }, 6000);
+        });
     </script>
 </body>
 </html>
