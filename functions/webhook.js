@@ -13,8 +13,8 @@ export async function onRequest(context) {
     if (update.channel_post) {
       const message = update.channel_post;
       
-      // Check if message is from monitored channel
-      if (message.chat.id.toString() === env.CHANNEL_ID?.toString()) {
+      // Check if message is from monitored channel - UPDATED TO TELEURL_ID
+      if (message.chat.id.toString() === env.TELEURL_ID?.toString()) {
         return await processChannelMessage(message, env);
       }
     }
